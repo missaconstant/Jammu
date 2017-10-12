@@ -1,0 +1,23 @@
+#!/usr/bin/php
+
+<?php
+
+	include_once 'jammu-instance';
+
+	// sending message process
+	if (strtolower(php_sapi_name()) == 'cli') {
+		if (count($argv)) {
+			if (isset($argv[1]) && isset($argv[2])) {
+				// formating message
+				$message = (object) ["address" => $argv[1], "body" => $argv[2]];
+				// sending message
+				JammuI::sendMessage($message);
+			}
+			else {
+				echo "\nParamètres pas complets !\n\n";
+			}
+		}
+		else {
+			echo "no args !";
+		}
+	}

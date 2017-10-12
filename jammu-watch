@@ -1,0 +1,68 @@
+#!/usr/bin/php
+
+<?php
+	require_once 'jammu.conf';
+
+	$jammu = new Jammu();
+
+	$smsNumber = json_decode(file_get_contents("messages.json"), true);
+	$smsNumber = count($smsNumber);
+
+	while (true) {
+		$js = json_decode(file_get_contents("messages.json"), true);
+		$count = count($js);
+
+		if ($count > $smsNumber && $count) {
+			$last = $js[$count - 1];
+
+			// check for splitted message
+			$i = $count - 2; // before the last
+
+			// finding splitted messages: begining by the last one
+			$splitted = [$last];
+
+			while ($i>=0 && $last['address'] == $js[$i]['address'] && ($last['date']-$js[$i]['date'])<1000) {
+				$splitted[] = $js[$i];
+				$i--;
+			}
+
+			// place order if more than one message founded
+			if (count($splitted) > 1) {
+				$ordered = [];
+
+				for ($i=0; $i < count($splitted); $i++) {
+					for ($j=0; $j < count($splitted); $j++) {
+						if ($splitted[$i]['date'] < $splitted[$j]['date']) {
+							// saving $splitted[$j]
+							$pass = $splitted[$j];
+							// replacing $j by $i
+							$splitted[$j] = $splitted[$i];
+							// replacing $i by $j which has been saved in $pass
+							$splitted[$i] = $pass;
+
+							break;
+						}
+					}
+				}
+
+				// getting message
+				for ($i=0; $i < count($splitted); $i++) {
+					$last['body'] .= $splitted[$i]['body'];
+					$last['date'] = $splitted[$i]['date'];
+				}
+			}
+
+			// console show message
+			echo "Nouveau message \n\nNumero: ".$last['address']."\nMessage: ".str_replace("'", " ", $last['body'])."\nDate: ".$last['date']."\n\n";
+			
+			// removing accents
+			$last['body'] = str_replace("'", " ", $last['body']);
+			
+			// executing onMessage event
+			$jammu->onMessage((object) $last);
+			
+			$smsNumber = $count;
+		}
+
+		sleep(3);
+	}

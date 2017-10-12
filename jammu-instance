@@ -1,0 +1,38 @@
+<?php
+
+	/**
+	* 
+	*/
+	class JammuI
+	{
+		
+		function __construct()
+		{
+			# code...
+		}
+
+		/**
+		*	sendMessage
+		*	@param Std::class object {address, body}
+		*/
+		static function sendMessage($message)
+		{
+			// getting pending message
+			$js = json_decode(file_get_contents('tosend.json'), true);
+			// adding new coming
+			$js[] = ["address" => $message->address, "body" => $message->body];
+			// save
+			if (!file_put_contents('tosend.json', json_encode($js))) {
+				throw new Exception("Erreur JAMMU 101", 1);
+			}
+		}
+
+		/**
+		*	say
+		*	@param String text
+		*/
+		static function say($text, $brk=true)
+		{
+			echo $text.($brk ? "\n" : '');
+		}
+	}
