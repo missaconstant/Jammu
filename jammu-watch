@@ -58,13 +58,13 @@
 			}
 
 			// console show message
-			echo "Nouveau message \n\nNumero: ".$last['address']."\nMessage: ".str_replace("'", " ", $last['body'])."\nDate: ".$last['date']."\n\n";
+			//echo "Nouveau message \n\nNumero: ".$last['address']."\nMessage: ".str_replace("'", " ", $last['body'])."\nDate: ".$last['date']."\n\n";
 			
 			// removing accents
 			$last['body'] = str_replace("'", " ", $last['body']);
 			
 			// executing onMessage event
-			$jammu->onMessage((object) $last);
+			$jammu->onMessageWatched((object) $last);
 			
 			$smsNumber = $count;
 		}

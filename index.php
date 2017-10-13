@@ -9,7 +9,10 @@
 	if (isset($_POST['address'])) {
 		$js = json_decode(file_get_contents('messages.json'), true);
 		$js[] = $_POST;
+		// saving for watcher
 		file_put_contents('messages.json' ,json_encode($js));
+		// fire on message event
+		$jammu->onMessage((object) $_POST);
 	}
 
 	else if (isset($_GET['get2send'])) {
