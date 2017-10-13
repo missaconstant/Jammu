@@ -5,7 +5,7 @@
 	*/
 	class JammuI
 	{
-		
+
 		function __construct()
 		{
 			# code...
@@ -34,5 +34,43 @@
 		static function say($text, $brk=true)
 		{
 			echo $text.($brk ? "\n" : '');
+		}
+
+		static function save($message)
+		{
+			try{
+				$bd = self::getDbInstance();
+
+				$q = $bd->prepare("INSERT INTO messages(address, body, send_date) VALUES(:address, :body, :send_date)");
+				$q->execute([
+					"address" => $message->address,
+					"body" => $message->body,
+					"send_date" => date("d/m/Y H:i")
+				]);
+
+				$q->closeCursor();
+			} 
+			catch(Exception $e){
+				die('Erreur : '.$e->getMessage()) ;
+			}
+		}
+
+		static function getDbInstance()
+		{
+			try {
+				$configs = self::loadConfigs();
+				$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION ;
+				$db = new PDO('mysql:dbname='.$configs->database.'; host='.$configs->hostname, $configs->username, $configs->password, $pdo_options) ;
+				$db->exec("set names ".$configs->dbcharset);
+
+				return $db;
+			} catch (Exception $e) {
+				return false;
+			}
+		}
+
+		static function loadConfigs()
+		{
+			return (object) json_decode(file_get_contents('config.json'), true);
 		}
 	}

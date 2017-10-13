@@ -5,8 +5,13 @@
 
 	$jammu = new Jammu();
 
-	$smsNumber = json_decode(file_get_contents("messages.json"), true);
-	$smsNumber = count($smsNumber);
+	// older decision
+	// $smsNumber = json_decode(file_get_contents("messages.json"), true);
+	// $smsNumber = count($smsNumber);
+
+	// newest decision
+	file_put_contents('messages.json', '[]');
+	$smsNumber = 0;
 
 	while (true) {
 		$js = json_decode(file_get_contents("messages.json"), true);
