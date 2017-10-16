@@ -73,4 +73,26 @@
 		{
 			return (object) json_decode(file_get_contents('config.json'), true);
 		}
+
+		static function toServer($url, $values=[], $type='get')
+		{
+			$q = curl_init();
+
+			$url .= (strtolower($type) == "get") ? http_build_query($values) : '';
+
+			curl_setopt($q, CURLOPT_URL, $url);
+
+			if (strtolower($type) == "post") {
+				curl_setopt($q, CURLOPT_POST, 1);
+				curl_setopt($q, CURLOPT_POSTFIELDS, http_build_query($values));
+			}
+
+			curl_setopt($q, CURLOPT_RETURNTRANSFER, 1);
+
+			$response = curl_exec($q);
+
+			curl_close($q);
+
+			return $response;
+		}
 	}
