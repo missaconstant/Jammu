@@ -36,6 +36,26 @@
 			echo $text.($brk ? "\n" : '');
 		}
 
+		/**
+		*	exec
+		*	@param String command
+		*/
+		static function exec($command)
+		{
+			if (preg_match("#exec:#", $command)) {
+				$command = explode('exec:', $command);
+				$command = trim($command[1]);
+				return exec($command." &");
+			}
+			else {
+				throw new Exception("Invalid command execution syntax", 1);
+			}
+		}
+
+		/**
+		*	save
+		*	@param StdClass message
+		*/
 		static function save($message)
 		{
 			try{
@@ -55,6 +75,9 @@
 			}
 		}
 
+		/**
+		*	getDbInstance
+		*/
 		static function getDbInstance()
 		{
 			try {
@@ -69,11 +92,39 @@
 			}
 		}
 
+		/**
+		*	cleanMessages
+		*	@param String cached: where would you like to remove messages ? database or file ?
+		*/
+		static function cleanMessages($cached)
+		{
+			switch ($cached) {
+				case 'file':
+					return file_put_contents('messages.json', '[]');
+					break;
+				
+				case 'db':
+					try {
+						$db = self::getDbInstance();
+						$db->exec('DELETE FROM messages');
+					} catch (Exception $e) {
+						die("An error occured !");
+					}
+					break;
+			}
+		}
+
 		static function loadConfigs()
 		{
 			return (object) json_decode(file_get_contents('config.json'), true);
 		}
 
+		/**
+		*	toServer
+		*	@param String url
+		*	@param Array values
+		*	@param String type
+		*/
 		static function toServer($url, $values=[], $type='get')
 		{
 			$q = curl_init();
