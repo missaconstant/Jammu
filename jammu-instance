@@ -20,7 +20,7 @@
 			// getting pending message
 			$js = json_decode(file_get_contents('tosend.json'), true);
 			// adding new coming
-			$js[] = ["address" => $message->address, "body" => $message->body];
+			$js[] = is_object($message) ? ["address" => $message->address, "body" => $message->body] : $message;
 			// save
 			if (!file_put_contents('tosend.json', json_encode($js))) {
 				throw new Exception("Erreur JAMMU 101", 1);
@@ -42,14 +42,8 @@
 		*/
 		static function exec($command)
 		{
-			if (preg_match("#exec:#", $command)) {
-				$command = explode('exec:', $command);
-				$command = trim($command[1]);
-				return exec($command." &");
-			}
-			else {
-				throw new Exception("Invalid command execution syntax", 1);
-			}
+			$command = trim($command);
+			return exec($command." &");
 		}
 
 		/**
@@ -96,7 +90,7 @@
 		*	cleanMessages
 		*	@param String cached: where would you like to remove messages ? database or file ?
 		*/
-		static function cleanMessages($cached)
+		static function cleanMessages($cached='file')
 		{
 			switch ($cached) {
 				case 'file':
