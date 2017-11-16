@@ -27,11 +27,13 @@ Il vous est possible de mettre le contenu de votre application sera dans deux me
 La methode `onMessage`.
 
 ```php
-public function onMessage (stdClass $message)
-{
-	# do something with the incoming message
-	# message-> : address, body, date_sent, date, service_center
+<?php
 
-	JammuI::say("Message reçu du ".$message->address);
-}
+	public function onMessage (stdClass $message)
+	{
+		# do something with the incoming message
+		# message-> : address, body, date_sent, date, service_center
+
+		JammuI::say("Message reçu du ".$message->address);
+	}
 ```
