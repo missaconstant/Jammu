@@ -24,8 +24,9 @@ Ce fichier contient une Classe nommée `Jammu` et fait appel à la classe JammuI
 
 Il vous est possible de mettre le contenu de votre application sera dans deux methodes de la Classe `Jammu`
 
-La methode `onMessage`
-``` php
+La methode `onMessage`.
+
+```php
 public function onMessage (stdClass $message)
 {
 	# do something with the incoming message
