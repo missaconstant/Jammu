@@ -30,6 +30,7 @@
 		/**
 		*	say
 		*	@param String text
+		*	@return Bool TRUE / FALSE
 		*/
 		static function say($text, $brk=true)
 		{
@@ -39,6 +40,7 @@
 		/**
 		*	exec
 		*	@param String command
+		*	@return Bool TRUE / FALSE
 		*/
 		static function exec($command)
 		{
@@ -49,6 +51,7 @@
 		/**
 		*	save
 		*	@param StdClass message
+		*	@return Bool TRUE / FALSE
 		*/
 		static function save($message)
 		{
@@ -70,8 +73,9 @@
 		}
 
 		/**
-		*	getDbInstance
-		*/
+		 *	getDbInstance
+		 *	@return PDO || FALSE
+		 */
 		static function getDbInstance()
 		{
 			try {
@@ -87,9 +91,10 @@
 		}
 
 		/**
-		*	cleanMessages
-		*	@param String cached: where would you like to remove messages ? database or file ?
-		*/
+		 *	cleanMessages
+		 *	@param String cached: where would you like to remove messages ? database or file ?
+		 *	@return Bool TRUE / FALSE
+		 */
 		static function cleanMessages($cached='file')
 		{
 			switch ($cached) {
@@ -118,6 +123,7 @@
 		*	@param String url
 		*	@param Array values
 		*	@param String type
+		*	@return String server answer
 		*/
 		static function toServer($url, $values=[], $type='get')
 		{
