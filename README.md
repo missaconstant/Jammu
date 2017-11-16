@@ -34,3 +34,4 @@ public function onMessage (stdClass $message)
 
 	JammuI::say("Message reçu du ".$message->address);
 }
+```
