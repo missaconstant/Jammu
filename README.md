@@ -2,6 +2,10 @@
 
 JAMMU est une revanche sur GAMMU-SMSD jugé trop compliqué dans sa configuration. C'est une application simple d'usage. JAMMU est très simple à configurer comme vous le découvrirez.
 
+## Prérequis ##
+
+Pour utilisez JAMMU vous devriez avoir installer `php` et `apache`.
+
 ## Installation ##
 
 Pour installer JAMMU clonez le dépot officiel.
@@ -12,15 +16,31 @@ JAMMU se constitue d'une application PHP et d'une application mobile Android.
 ### Pour l'application mobile ###
 
 Installez l'application mobile `jammu-app.apk` et accordez lui les permissions requises.
+Connectez votre téléphone au wifi sur le même réseau que votre ordinateur.
+Ensuite ouvrez l'application et dans la barre de recherche entrez l'adresse de votre ordinateur sur le réseau.
+
+Par exemple: `http://192.168.1.111/JAMMU/`. Puis appuyez sur le bouton `Start server`.
+Si après le `loading` le server demarre et reste sur la vue `serving` pendans plus de 5s, alors la connexion est réussie.
 
 ### Pour le reste ###
 
-À ce niveau, plus grand chose à faire. En effet l'installation est terminée
+Le dossier de JAMMU doit se trouvez soit dans votre `localhost` dans quel cas pour y acceder il faudra par exemple `http://192.168.1.111/JAMMU`.
+Dans le second cas vous pouvez lancer le serveur apache directement depuis le dossier d'installation de JAMMU si ce vous ne désirez pas le mettre dans le `localhost`.
+
+Avec votre terminal placez vous dans le dossier de JAMMU et executez la commande suivante:
+
+```cmd
+php -S localhost:9000
+```
+
+**9000** étant le port que vous aurez chosis pour votre application.
+
+Ensuite dans l'application mobile mettez dans la barre de recherche, en considerant que votre adresse IP est 192.168.1.10 : `http://192.168.1.10:9000`
 
 ## Comment utiliser JAMMU ##
 
-Dans parmis les fichiers installés, celui dans lequel vous serrez appelés à developper votre application est le fichier `jammu-conf`.
-Ce fichier contient une Classe nommée `Jammu` et fait appel à la classe JammuI.
+Parmis les fichiers installés, celui dans lequel vous serrez appelés à developper votre application est le fichier `jammu-conf`.
+Ce fichier contient une Classe nommée `Jammu` et fait appel à la classe `JammuI`.
 
 La methode `onMessage`.
 
