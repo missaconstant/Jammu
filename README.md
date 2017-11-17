@@ -44,13 +44,19 @@ Le code suivant enregistre le message reçu dans un fichier nommé `monmessage.t
 
 	public function onMessage (StdClass $message)
 	{
+		// on recuppère le numero
 		$numero = $message->address;
+		// on recuppère le contenu du message
 		$contenu = $message->body;
-		
+		// on combine tout
 		$msg = $numero.' : '.$contenu;
-		
+		// puis on enregistre
 		file_puts_content('monmessage.txt', $contenu);
 	}
 ```
 
 Pour acceder au numero du destinateur faite `$message->address` et pour acceder au contenu du message `$message->body`.
+
+## Envoyer un message ##
+
+Pour envoyer un message avec JAMMU, on dispose de deux possibilités.
