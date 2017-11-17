@@ -22,8 +22,6 @@ Installez l'application mobile `jammu-app.apk` et accordez lui les permissions r
 Dans parmis les fichiers installés, celui dans lequel vous serrez appelés à developper votre application est le fichier `jammu-conf`.
 Ce fichier contient une Classe nommée `Jammu` et fait appel à la classe JammuI.
 
-Il vous est possible de mettre le contenu de votre application sera dans deux methodes de la Classe `Jammu`
-
 La methode `onMessage`.
 
 ```php
@@ -37,3 +35,22 @@ La methode `onMessage`.
 		JammuI::say("Message reçu du ".$message->address);
 	}
 ```
+
+C'est cette méthode qui est exécutée lorsque vous recevez un message. Le message est alors contenu dans la variable `StdClass $message` passée en paramètre.
+
+Le code suivant enregistre le message reçu dans un fichier nommé `monmessage.txt`.
+```php
+<?php
+
+	public function onMessage (StdClass $message)
+	{
+		$numero = $message->address;
+		$contenu = $message->body;
+		
+		$msg = $numero.' : '.$contenu;
+		
+		file_puts_content('monmessage.txt', $contenu);
+	}
+```
+
+Pour acceder au numero du destinateur faite `$message->address` et pour acceder au contenu du message `$message->body`.
