@@ -22,9 +22,11 @@ Ensuite ouvrez l'application et dans la barre de recherche entrez l'adresse de v
 Par exemple: `http://192.168.1.111/JAMMU/`. Puis appuyez sur le bouton `Start server`.
 Si après le `loading` le server demarre et reste sur la vue `serving` pendans plus de 5s, alors la connexion est réussie.
 
+**NB: N'oubliez pas le `/` à la fin de l'adresse.**
+
 ### Pour le reste ###
 
-Le dossier de JAMMU doit se trouvez soit dans votre `localhost` dans quel cas pour y acceder il faudra par exemple `http://192.168.1.111/JAMMU`.
+Le dossier de JAMMU doit se trouvez soit dans votre `localhost` dans quel cas pour y acceder il faudra par exemple `http://192.168.1.111/JAMMU/`.
 Dans le second cas vous pouvez lancer le serveur apache directement depuis le dossier d'installation de JAMMU si ce vous ne désirez pas le mettre dans le `localhost`.
 
 Avec votre terminal placez vous dans le dossier de JAMMU et executez la commande suivante:
@@ -35,7 +37,7 @@ php -S localhost:9000
 
 **9000** étant le port que vous aurez chosis pour votre application.
 
-Ensuite dans l'application mobile mettez dans la barre de recherche, en considerant que votre adresse IP est 192.168.1.10 : `http://192.168.1.10:9000`
+Ensuite dans l'application mobile mettez dans la barre de recherche, en considerant que votre adresse IP est 192.168.1.10 : `http://192.168.1.10:9000/`
 
 ## Comment utiliser JAMMU ##
 
