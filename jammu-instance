@@ -30,7 +30,7 @@
 		/**
 		*	say
 		*	@param String text
-		*	@return Bool TRUE / FALSE
+		*	@return Void
 		*/
 		static function say($text, $brk=true)
 		{
@@ -40,12 +40,12 @@
 		/**
 		*	exec
 		*	@param String command
-		*	@return Bool TRUE / FALSE
+		*	@return String command result
 		*/
-		static function exec($command)
+		static function exec($command, $stop=false)
 		{
 			$command = trim($command);
-			return exec($command." &");
+			return exec($command.($stop ? " &" : ''));
 		}
 
 		/**

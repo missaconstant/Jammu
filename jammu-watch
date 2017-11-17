@@ -64,7 +64,7 @@
 			$last['body'] = str_replace("'", " ", $last['body']);
 			
 			// executing onMessage event
-			$jammu->onMessageWatched((object) $last);
+			$jammu->onMessage((object) $last);
 			
 			$smsNumber = $count;
 		}
