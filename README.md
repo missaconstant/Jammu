@@ -60,3 +60,37 @@ Pour acceder au numero du destinateur faite `$message->address` et pour acceder 
 ## Envoyer un message ##
 
 Pour envoyer un message avec JAMMU, on dispose de deux possibilités.
+
+### Depuis le code de votre application ###
+
+```php
+<?php
+	JammuI::sendMessage(["address" => "+22501020304", "body" => "Hello World !"]);
+```
+
+### Depuis la ligne de commande ###
+
+Avec votre terminal, placez vous dans le dossier ou vous avez installé JAMMU. puis executez la commande qui suit:
+
+```cmd
+./jammu-send "+22501020304" "Hello World"
+```
+
+## jammu-watch ##
+
+Si vous avez besoin de faire une application qui execute des commande de la console, alors il vous faudra activer le watcher. j'ai nommé **jammu-watch**.
+Pour l'activer rien de plus simple. Avec le terminal placez vous dans le dossier ou vous avez installé JAMMU et executez la commande:
+
+```cmd
+./jammu-watch
+```
+
+Et c'est tout pour l'activation. Pour l'arreter faites **Ctrl + C** dans le terminal.
+Une fois cela fait, dans votre application vous pouvez executer la commande que vous souhaitez en faisant comme suit:
+
+```php
+<?php
+	JammuI::exec("notify-send \"Hello World\" ");
+```
+
+**IMPORTANT:** Pour jammu-watch, après chaque modification du code, il vous faudra redemarer le watcher en faisant **Ctrl+C** puis **./jammu-watch**.
