@@ -113,6 +113,7 @@ Une fois cela fait, dans votre application vous pouvez executer la commande que 
 ```php
 <?php
 	JammuI::exec("notify-send \"Hello World\" ");
+	// JammuI::exec represente la fonction exec en php
 ```
 
 **IMPORTANT:** Pour jammu-watch, après chaque modification du code, il vous faudra redemarer le watcher en faisant **Ctrl+C** puis **./jammu-watch**.
