@@ -15,12 +15,27 @@
 		*	sendMessage
 		*	@param Std::class object {address, body}
 		*/
-		static function sendMessage($message)
+		static function sendMessage($tosend)
 		{
+			// converting message into StdClass
+			$message = is_array($tosend) ? (object) $tosend : $tosend;
 			// getting pending message
 			$js = json_decode(file_get_contents('tosend.json'), true);
-			// adding new coming
-			$js[] = is_object($message) ? ["address" => $message->address, "body" => $message->body] : $message;
+			// adding message to send: there could have many 
+			if (is_array($message->address)) {
+				foreach ($message->address as $k => $v) {
+					$js[] = (object) ["address" => trim($v), "body" => $message->body];
+				}
+			}
+			else if (preg_match("#[,]+#", $message->address)) {
+				$message->address = explode(',', $message->address);
+				foreach ($message->address as $k => $v) {
+					$js[] = (object) ["address" => trim($v), "body" => $message->body];
+				}
+			}
+			else {
+				$js[] = $message;
+			}
 			// save
 			if (!file_put_contents('tosend.json', json_encode($js))) {
 				throw new Exception("Erreur JAMMU 101", 1);
