@@ -90,13 +90,35 @@ Pour envoyer un message avec JAMMU, on dispose de deux possibilités.
 	JammuI::sendMessage(["address" => "+22501020304", "body" => "Hello World !"]);
 ```
 
+Et pour envoyer un message groupé ...
+
+```php
+<?php
+	JammuI::sendMessage([
+		"address" => ["+22503552233", "+22509876543", "+22567568798"],
+		"body" => "Hello World !"
+	]);
+
+	// ou aussi
+
+	JammuI::sendMessage([
+		"address" => "+22503552233, +22509876543, +22567568798",
+		"body" => "Hello World !"
+	]);
+```
+
 ### Depuis la ligne de commande ###
 
 Avec votre terminal, placez vous dans le dossier ou vous avez installé JAMMU. puis executez la commande qui suit:
 
 ```cmd
-./jammu-send "+22501020304" "Hello World"
+./jammu-send "+22501020304" "Hello World !"
 ```
+
+Et pour envoyer un message groupé ...
+
+```cmd
+./jammu-send "+22503552233, +22509876543, +22567568798" "Hello World !"
 
 ## jammu-watch ##
 
