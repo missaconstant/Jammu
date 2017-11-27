@@ -119,6 +119,7 @@ Et pour envoyer un message groupé ...
 
 ```cmd
 ./jammu-send "+22503552233, +22509876543, +22567568798" "Hello World !"
+```
 
 ## jammu-watch ##
 
