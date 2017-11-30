@@ -144,7 +144,7 @@
 		{
 			$q = curl_init();
 
-			$url .= '?'.(strtolower($type) == "get") ? http_build_query($values) : '';
+			$url .= (strtolower($type) == "get") ? '?'.http_build_query($values) : '';
 
 			curl_setopt($q, CURLOPT_URL, $url);
 
