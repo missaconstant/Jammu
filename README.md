@@ -4,7 +4,7 @@ JAMMU est une application qui vous permet de créer facilement vos applications 
 
 ## Prérequis ##
 
-Pour utilisez JAMMU vous devriez avoir installer `php` et `apache`.
+Pour utilisez JAMMU vous devriez avoir installer ```php``` et ```apache```.
 
 ## Installation ##
 
@@ -27,17 +27,23 @@ Si après le `loading` le server demarre et reste sur la vue `serving` pendans p
 ### Pour le reste ###
 
 Le dossier de JAMMU doit se trouvez soit dans votre `localhost` dans quel cas pour y acceder il faudra par exemple `http://192.168.1.111/JAMMU/`.
-Dans le second cas vous pouvez lancer le serveur apache directement depuis le dossier d'installation de JAMMU si ce vous ne désirez pas le mettre dans le `localhost`.
+Dans le second cas vous pouvez lancer le serveur apache directement depuis le dossier d'installation de JAMMU si vous ne désirez pas le mettre dans le `localhost`.
 
 Avec votre terminal placez vous dans le dossier de JAMMU et executez la commande suivante:
 
 ```cmd
-php -S localhost:9000
+php -S votre_adresse_sur_le_reseau:port_choisis
 ```
 
-**9000** étant le port que vous aurez chosis pour votre application.
+Ex: Si votre l'adresse IP de votre machine est 192.168.1.15, placez vous dans le dossier de votre application JAMMU et faites:
 
-Ensuite dans l'application mobile mettez dans la barre de recherche, en considerant que votre adresse IP est 192.168.1.10 : `http://192.168.1.10:9000/`
+```cmd
+php -S 192.168.1.15:9000
+```
+
+***9000 étant le port choisit.***
+
+Ensuite dans l'application mobile mettez dans la barre de recherche: `http://192.168.1.15:9000/`
 
 ## Comment utiliser JAMMU ##
 
