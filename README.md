@@ -1,6 +1,6 @@
 # JAMMU #
 
-JAMMU est une revanche sur GAMMU-SMSD jugé trop compliqué dans sa configuration. C'est une application simple d'usage. JAMMU est très simple à configurer comme vous le découvrirez.
+JAMMU est une application qui vous permet de créer facilement vos applications SMS. En plus de son usage qui est simple, JAMMU est facile à configurer comme vous le découvrirez.
 
 ## Prérequis ##
 
@@ -119,6 +119,21 @@ Et pour envoyer un message groupé ...
 
 ```cmd
 ./jammu-send "+22503552233, +22509876543, +22567568798" "Hello World !"
+```
+
+Si vous avez une liste de contact dans un fichier formaté comme suit:
+
+```cmd
+01020304
+03020476
+01989786
+07867653
+```
+
+Faites:
+
+```cmd
+./jammu-send "path:chemin/vers/le/fichier" "Contenu du message"
 ```
 
 ## jammu-watch ##
