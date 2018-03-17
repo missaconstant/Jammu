@@ -4,13 +4,13 @@
 	{
 		return (object) [
 
-			"hostname" => "localhost",
+			"hostname"  => "localhost",
 
-			"username" => "root",
+			"username"  => "root",
 
-			"password" => "root",
+			"password"  => "root",
 
-			"database" => "jammu",
+			"database"  => "jammu",
 			
 			"dbcharset" => "utf8"
 		];

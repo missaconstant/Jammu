@@ -32,13 +32,13 @@ Dans le second cas vous pouvez lancer le serveur apache directement depuis le do
 Avec votre terminal placez vous dans le dossier de JAMMU et executez la commande suivante:
 
 ```cmd
-php -S votre_adresse_sur_le_reseau:port_choisis
+./jammu-watch votre_adresse_sur_le_reseau:port_choisis
 ```
 
 Ex: Si votre l'adresse IP de votre machine est 192.168.1.15, placez vous dans le dossier de votre application JAMMU et faites:
 
 ```cmd
-php -S 192.168.1.15:9000
+./jammu-watch 192.168.1.15:9000
 ```
 
 ***9000 étant le port choisit.***
@@ -144,20 +144,19 @@ Faites:
 
 ## jammu-watch ##
 
-Si vous avez besoin de faire une application qui execute des commande de la console, alors il vous faudra activer le watcher. j'ai nommé **jammu-watch**.
-Pour l'activer rien de plus simple. Avec le terminal placez vous dans le dossier ou vous avez installé JAMMU et executez la commande:
+Si vous avez besoin de faire une application qui execute des commande de la console, alors il vous faudra imperativement passer par **jammu-watch**.
+Avec le terminal placez vous dans le dossier ou vous avez installé JAMMU et executez la commande:
 
 ```cmd
-./jammu-watch
+./jammu-watch votre_adresse_sur_le_reseau:port_choisis
 ```
 
-Et c'est tout pour l'activation. Pour l'arreter faites **Ctrl + C** dans le terminal.
+Et c'est tout pour l'activation (Pour l'arreter faites **Ctrl + C** dans le terminal.)
 Une fois cela fait, dans votre application vous pouvez executer la commande que vous souhaitez en faisant comme suit:
 
 ```php
 <?php
 	JammuI::exec("notify-send \"Hello World\" ");
-	// JammuI::exec represente la fonction exec en php
 ```
 
 **IMPORTANT:** Pour jammu-watch, après chaque modification du code, il vous faudra redemarer le watcher en faisant **Ctrl+C** puis **./jammu-watch**.
