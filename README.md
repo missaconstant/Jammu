@@ -41,7 +41,7 @@ Ex: Si votre l'adresse IP de votre machine est 192.168.1.15, placez vous dans le
 ./jammu-watch 192.168.1.15:9000
 ```
 
-***9000 étant le port choisit.***
+***9000 étant le port choisi.***
 
 Ensuite dans l'application mobile mettez dans la barre de recherche: `http://192.168.1.15:9000/`
 
