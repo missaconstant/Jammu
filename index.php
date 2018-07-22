@@ -1,5 +1,6 @@
 <?php
-
+	header("Access-Control-Allow-Origin: *");
+	
 	require_once 'jammu.conf';
 
 	$jammu = new Jammu();
@@ -22,6 +23,10 @@
 		file_put_contents('tosend.json', '[]');
 		// returning messages
 		echo $js;
+	}
+
+	else if (isset($_GET['searchserver'])) {
+		echo json_encode(["error" => false]);
 	}
 
 	else {
