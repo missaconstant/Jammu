@@ -1,6 +1,7 @@
 <?php
 	header("Access-Control-Allow-Origin: *");
-	
+	define("ROOT", __DIR__);
+
 	require_once 'jammu.conf';
 
 	$jammu = new Jammu();
@@ -9,7 +10,7 @@
 
 	if (isset($_POST['address'])) {
 		$js = json_decode(file_get_contents('messages.json'), true);
-		$js[] = $_POST;
+		if (JammuI::messageExists($js, $_POST)) $js[] = $_POST;
 		// saving for watcher
 		file_put_contents('messages.json' ,json_encode($js));
 		// fire on message event
@@ -18,11 +19,14 @@
 
 	else if (isset($_GET['get2send'])) {
 		// getting messages
-		$js = file_get_contents('tosend.json');
+		$js = json_decode(file_get_contents('tosend.json'), true);
+		$go = json_encode($js['waiting']);
 		// emptying message to send list
-		file_put_contents('tosend.json', '[]');
+		$js['waiting'] = [];
+		$js['lastquery'] = date('d/m/Y H:i:s');
+		file_put_contents('tosend.json', json_encode($js));
 		// returning messages
-		echo $js;
+		echo $go;
 	}
 
 	else if (isset($_GET['searchserver'])) {

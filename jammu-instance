@@ -15,30 +15,44 @@
 			// converting message into StdClass
 			$message = is_array($tosend) ? (object) $tosend : $tosend;
 			// getting pending message
-			$js = json_decode(file_get_contents('tosend.json'), true);
+			$js = json_decode(file_get_contents(__DIR__ . '/tosend.json'), true);
 			// adding message to send: there could have many 
 			if (is_array($message->address))
 			{
-				foreach ($message->address as $k => $v) {
-					$js[] = (object) ["address" => trim($v), "body" => $message->body];
-				}
+				$js['waiting'][] = (object) ["address" => $message->address, "body" => $message->body];
+				/*foreach ($message->address as $k => $v) {
+					$js['waiting'][] = (object) ["address" => trim($v), "body" => $message->body];
+				}*/
 			}
 			else if (preg_match("#[,]+#", $message->address))
 			{
 				$message->address = explode(',', $message->address);
 				foreach ($message->address as $k => $v)
 				{
-					$js[] = (object) ["address" => trim($v), "body" => $message->body];
+					$message->address[$k] = trim($v);
+					/*$js['waiting'][] = (object) ["address" => trim($v), "body" => $message->body];*/
 				}
+				$js['waiting'][] = (object) ["address" => $message->address, "body" => $message->body];
 			}
 			else {
-				$js[] = $message;
+				$js['waiting'][] = $message;
 			}
 			// save
-			if (!file_put_contents('tosend.json', json_encode($js)))
+			if (!file_put_contents(__DIR__ . '/tosend.json', json_encode($js)))
 			{
 				throw new Exception("Erreur JAMMU 101", 1);
 			}
+		}
+
+		static function messageExists($list, $message)
+		{
+			$ison = false;
+			foreach ($list as $k => $msg) {
+				if ($msg['date_sent'] == $message['date_sent'] && $msg['address'] == $message['address'] && $msg['body'] == $message['body']) {
+					$ison = true;
+				}
+			}
+			return $ison;
 		}
 
 		/**
