@@ -123,13 +123,13 @@
 		 *	getDbInstance
 		 *	@return PDO || FALSE
 		 */
-		static function getDbInstance()
+		static function getDbInstance($dbname=false)
 		{
 			try
 			{
 				$configs = self::loadConfigs();
 				$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION ;
-				$db = new PDO('mysql:dbname='.$configs->database.'; host='.$configs->hostname, $configs->username, $configs->password, $pdo_options) ;
+				$db = new PDO('mysql:dbname='. ($dbname ? $dbname : $configs->database) .'; host='.$configs->hostname, $configs->username, $configs->password, $pdo_options) ;
 				$db->exec("set names ".$configs->dbcharset);
 
 				return $db;
