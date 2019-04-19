@@ -1,10 +1,9 @@
 #!/usr/bin/php
-
 <?php
 
-include __DIR__ . '/../autoload.php';
-
 namespace Jammu\Console;
+
+include __DIR__ . '/../autoload.php';
 
 /**
  * Class that helps to start manually a server
@@ -15,7 +14,7 @@ class JammuWatch
 	 * Launch watcher
 	 * @return { Text Console }
 	 */
-	public static function watch()
+	public static function watch($argv)
 	{
 		if (!isset($argv[1])) exit();
 
@@ -36,4 +35,4 @@ class JammuWatch
 	}
 }
 
-JammuWatch::watch();
+JammuWatch::watch($argv);

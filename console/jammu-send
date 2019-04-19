@@ -1,12 +1,11 @@
 #!/usr/bin/php
-
 <?php
 
 namespace Jammu\console;
 
 include __DIR__ . '/../autoload.php';
 
-use namespace Jammu\core\JammuI;
+use Jammu\core\JammuI;
 
 /**
  * JammuSend Class help to send SMS from command line
@@ -17,7 +16,7 @@ class JammuSend
 	 * Action method checks and send SMS to specified number(s)
 	 * @return void { Text console };
 	 */
-	public static function send()
+	public static function send($argv)
 	{
 		// sending message process
 		if (strtolower(php_sapi_name()) == 'cli')
@@ -63,4 +62,4 @@ class JammuSend
 	}
 }
 
-JammuSend::send();
+JammuSend::send($argv);
