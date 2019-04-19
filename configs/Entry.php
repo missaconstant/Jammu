@@ -16,7 +16,7 @@ class Entry
      public function getEntries()
      {
          return [
-             "helloworld" => "#\#hello#"
+            "helloworld" => "#\#hello#"
          ];
      }
 }
