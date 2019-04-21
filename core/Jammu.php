@@ -43,8 +43,12 @@ use Jammu\configs\Entry;
          $entries = Entry::getEntries();
 
          // looping on entries to execute thoes defined
-         foreach ($entries as $appname => $pregEntry) {
-             JammuI::app($appname, $message, preg_match($pregEntry, $message->body));
+         foreach ($entries as $k => $entryline) {
+             $splited  = explode(":", $entryline);
+             $appname  = trim($splited[0]);
+             $appentry = str_replace("#", "\#", trim($splited[1]));
+
+             JammuI::app($appname, $message, preg_match("#$appentry#", $message->body));
          }
      }
  }

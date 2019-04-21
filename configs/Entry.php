@@ -10,13 +10,11 @@ include __DIR__ . '/../autoload.php';
 class Entry
 {
     /**
-     * List diferents entry points
+     * List diferents entry points from entries file
      * @return Array
      */
      public static function getEntries()
      {
-         return [
-            "helloworld" => "#\#hello#"
-         ];
+         return json_decode( file_get_contents(__DIR__ . '/Entries.json') );
      }
 }

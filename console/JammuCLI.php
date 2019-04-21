@@ -21,8 +21,11 @@ class JammuCLI
     public static function create($argv)
     {
         $appname = @$argv[0];
+        $entry   = @$argv[1];
         $spaces  = "    ";
         $appdir  = __DIR__ . '/../apps/' . $appname;
+
+        // exit(addslashes($entry));
 
         echo "\n" . Colorizer::colorize("--- Jammu start creating app [ $appname ] ---") . "\n";
 
@@ -42,13 +45,17 @@ class JammuCLI
         }
 
         // start creation process
-        self::createProcess($appname, $appdir);
+        self::createProcess($appname, $appdir, $entry);
 
         echo Colorizer::colorize($spaces . "App [ $appname ] successfully created !", "green") . "\n";
 
         echo "\n";
     }
 
+    /**
+     * Method for applicatoin removeing
+     * @param argv { Array }
+     */
     public static function delete($argv)
     {
         $appname = $argv[0];
@@ -71,23 +78,45 @@ class JammuCLI
         echo "\n";
     }
 
-    private static function createProcess($appname, $appdir)
+    private static function createProcess($appname, $appdir, $entry=false)
     {
+        // app.php file creation process
+
         $file_content = "<?php\n\n" .
-                        "use Jammu\\core\\JammuI\n\n" .
-                        "class $appname {\n" .
-                        "\tpublic static function call(StdClass)\n" .
-                        "\t{" .
+                        "use Jammu\\core\\JammuI;\n\n" .
+                        "class $appname {\n\n" .
+                        "\tpublic static function call(StdClass \$message)\n" .
+                        "\t{\n" .
                         "\t\tJammuI::sendMessage([\n" .
                         "\t\t\t\"address\" => \$message->address,\n" .
                         "\t\t\t\"body\"    => \"Hello you are on my Jammu app [ $appname ]\"\n" .
                         "\t\t]);\n" .
                         "\t}\n" .
-                        "}";
+                        "\n}";
 
         if ( ! file_put_contents($appdir . '/app.php', $file_content) )
         {
             exit(Colorizer::colorize($spaces . "An error occured ! Please check permissions.\n", "red"));
+        }
+
+        // adding entry point to Entries file
+
+        if ( $entry && strlen(trim($entry)) )
+        {
+            $newlines = [];
+            $entries  = json_decode(file_get_contents(__DIR__ . '/../configs/Entries.json'), true);
+            $entries[] = $appname . ': ' . $entry;
+
+            foreach ($entries as $app => $line)
+            {
+                $newlines[] = "\t\"$line\"";
+            }
+
+            $newlines = "[\n" .
+                        implode(",\n", $newlines) .
+                        "\n]";
+
+            file_put_contents(__DIR__ . '/../configs/Entries.json', $newlines);
         }
     }
 

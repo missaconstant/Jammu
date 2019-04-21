@@ -17,17 +17,17 @@ class JammuWatch
 	 */
 	public static function watch($argv)
 	{
-		if (!isset($argv[1])) exit();
+		if (!isset($argv[0])) exit();
 
-		if (preg_match("#[0-9]{1,4}.[0-9]{1,4}.[0-9]{1,4}.[0-9]{1,4}[:]{1,4}#", @$argv[1]))
+		if (preg_match("#[0-9]{1,4}.[0-9]{1,4}.[0-9]{1,4}.[0-9]{1,4}[:]{1,4}#", @$argv[0]))
 		{
-			$address = $argv[1];
-			echo "Attente de connexion du device au " . $argv[1] . "\n\n";
-			exec("php -S ". @$argv[1]);
+			$address = $argv[0];
+			echo "Attente de connexion du device au " . $argv[0] . "\n\n";
+			exec("php -S ". @$argv[0]);
 		}
-		else if (preg_match("#[0-9]{2,4}#", @$argv[1])) {
-			echo "Attente de connexion du device au 0.0.0.0:" . $argv[1] . "\n\n";
-			exec("php -S 0.0.0.0:" . $argv[1]);
+		else if (preg_match("#[0-9]{2,4}#", @$argv[0])) {
+			echo "Attente de connexion du device au 0.0.0.0:" . $argv[0] . "\n\n";
+			exec("php -S 0.0.0.0:" . $argv[0]);
 		}
 		else
 		{

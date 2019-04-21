@@ -20,11 +20,15 @@ class EntryPoint
 	{
 		if (isset($_POST['address'])) {
 			$js = json_decode(file_get_contents(__DIR__ . '/gateways/messages.json'), true);
-			if (JammuI::messageExists($js, $_POST)) $js[] = $_POST;
-			// saving for watcher
-			file_put_contents(__DIR__ . '/gateways/messages.json' ,json_encode($js));
-			// fire on message event
-			Jammu::onMessage((object) $_POST);
+
+			if ( ! JammuI::messageExists($js, $_POST))
+			{
+				$js[] = $_POST;
+				// saving for watcher
+				file_put_contents(__DIR__ . '/gateways/messages.json', json_encode($js));
+				// fire on message event
+				Jammu::onMessage((object) $_POST);
+			}
 		}
 
 		else if (isset($_GET['get2send'])) {
