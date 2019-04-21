@@ -1,0 +1,53 @@
+#!/usr/bin/php
+<?php
+
+namespace Jammu\console;
+
+if (strtolower(php_sapi_name()) != 'cli') exit("This is CLI app.");
+
+include __DIR__ . '/autoload.php';
+
+use Jammu\console\JammuSend;
+use Jammu\console\JammuCLI;
+use Jammu\console\JammuWatch;
+use Jammu\core\JammuConsoleColorify as Colorizer;
+
+/**
+ * Consoler is the top level which get access to specific console app asked
+ */
+class Consoler
+{
+    public static function watch($argv)
+    {
+        $parts = array_slice($argv, 2);
+
+        if ( !isset($argv[1]) )
+        {
+            exit("You have to specify action to execute\n");
+        }
+
+        switch ($argv[1]) {
+            case 'send':
+                JammuSend::send($parts);
+                break;
+
+            case 'watch':
+                JammuWatch::watch($parts);
+                break;
+
+            case 'create':
+                JammuCLI::create($parts);
+                break;
+
+            case 'delete':
+                JammuCLI::delete($parts);
+                break;
+
+            default:
+                exit(Colorizer::colorize("Errorr: Uknown action ". $argv[1], "red") ."\n");
+                break;
+        }
+    }
+}
+
+Consoler::watch($argv);
