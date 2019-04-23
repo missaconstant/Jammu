@@ -50,4 +50,4 @@ class Jammu
     }
 }
 
-Consoler::watch($argv);
+Jammu::watch($argv);
