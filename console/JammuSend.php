@@ -24,10 +24,10 @@ class JammuSend
 		{
 			if (count($argv))
 			{
-				if (isset($argv[1]) && isset($argv[2]))
+				if (isset($argv[0]) && isset($argv[1]))
 				{
 					// formating message
-					$message = (object) ["address" => self::checkNumbers($argv[1]), "body" => $argv[2]];
+					$message = (object) ["address" => self::checkNumbers($argv[0]), "body" => $argv[1]];
 					// sending message
 					JammuI::sendMessage($message);
 				}

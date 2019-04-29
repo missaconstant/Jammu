@@ -5,7 +5,7 @@ namespace Jammu\console;
 
 if (strtolower(php_sapi_name()) != 'cli') exit("This is CLI app.");
 
-include __DIR__ . '/autoload.php';
+include 'autoload.php';
 
 use Jammu\console\JammuSend;
 use Jammu\console\JammuCLI;
