@@ -67,15 +67,25 @@ class JammuI
 	*/
 	public static function app($appname, $message, $pass=true)
 	{
-		if (is_dir(__DIR__ . '/../apps/' . $appname))
+		if ($pass)
 		{
-			require(__DIR__ . '/../apps/' . $appname . '/app.php');
-
-			if ($pass)
+			if (is_dir(__DIR__ . '/../apps/' . $appname) && file_exists(__DIR__ . '/../apps/' . $appname . '/app.php'))
 			{
-				$appname::call($message);
-			}
+				// integrating project app.php file
+				require(__DIR__ . '/../apps/' . $appname . '/app.php');
 
+				// try calling the entry method
+				if (method_exists($appname, 'call'))
+				{
+					$appname::call($message);
+				}
+				else {
+					throw new \Exception("You have to define call method in app.php file.", 1);
+				}
+			}
+			else {
+				throw new \Exception("Can't find $appname project directory or app.php file.", 1);
+			}
 		}
 	}
 
