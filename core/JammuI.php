@@ -144,13 +144,13 @@ class JammuI
 		try
 		{
 			$configs = self::loadConfigs();
-			$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-			$db = new PDO('mysql:dbname='. ($dbname ? $dbname : $configs->database) .'; host='.($dbhost ? $dbhost : $configs->hostname), ($dbuser ? $dbuser : $configs->username), ($dbpass ? $dbpass : $configs->password), $pdo_options);
+			$pdo_options[\PDO::ATTR_ERRMODE] = \PDO::ERRMODE_EXCEPTION;
+			$db = new \PDO('mysql:dbname='. ($dbname ? $dbname : $configs->database) .'; host='.($dbhost ? $dbhost : $configs->hostname), ($dbuser ? $dbuser : $configs->username), ($dbpass ? $dbpass : $configs->password), $pdo_options);
 			$db->exec("set names ".$configs->dbcharset);
 
 			return $db;
 		}
-		catch (Exception $e)
+		catch (\Exception $e)
 		{
 			return false;
 		}
