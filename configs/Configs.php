@@ -16,7 +16,7 @@
 		{
 			return (object) [
 
-				"hostname"  => "localhost",
+				"hostname"  => "localhost:8889",
 
 				"username"  => "root",
 

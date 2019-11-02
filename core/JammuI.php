@@ -218,4 +218,16 @@ class JammuI
 
 		return $response;
 	}
+
+	/**
+	*	log
+	*	@param String message
+	*/
+	public static function log($message)
+	{
+		$filename 	= date('d.m.Y') . '.jlog';
+		$old		= @file_get_contents(__DIR__ . '/../logs/' . $filename);
+
+		file_put_contents(__DIR__ . '/../logs/' . $filename, $old . "\n" . $message);
+	}
 }
