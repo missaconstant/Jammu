@@ -204,6 +204,7 @@ class JammuI
 		$url .= (strtolower($type) == "get") ? '?'.http_build_query($values) : '';
 
 		curl_setopt($q, CURLOPT_URL, $url);
+		curl_setopt($q, CURLOPT_SSL_VERIFYPEER, false);
 
 		if (strtolower($type) == "post") {
 			curl_setopt($q, CURLOPT_POST, 1);
