@@ -1,0 +1,5 @@
+apps/*
+gateways/*
+logs/*
+configs/Configs.php
+configs/Entries.json
