@@ -48,7 +48,7 @@ use Jammu\configs\Entry;
              $appname  = trim($splited[0]);
              $appentry = str_replace("#", "\#", trim($splited[1]));
 
-             JammuI::app($appname, $message, preg_match("#$appentry#", $message->body));
+             JammuI::app($appname, $message, preg_match("#^$appentry#", $message->body));
          }
      }
  }
